@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blog - Todo List Tutorial</title>
+
+        <!-- Google Fonts: Fira Code (monospace cho code) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- PrismJS Theme: Okaidia (dark) -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css"
+        />
+
+        <style>
+            /* Áp dụng Fira Code cho tất cả code block */
+            pre[class*="language-"],
+            code[class*="language-"] {
+                font-family: "Fira Code", "Courier New", monospace;
+                font-size: 14px;
+                line-height: 1.7;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Blog - Todo List Tutorial</h1>
+
+        <!-- Mục 1 -->
+        <h2>1) Mục tiêu & demo chức năng</h2>
+        <p>Ứng dụng Todo List sẽ có:</p>
+        <ul>
+            <li>Ô nhập nội dung công việc</li>
+            <li>Nút Thêm</li>
+            <li>Danh sách công việc hiển thị bên dưới</li>
+            <li>Mỗi công việc có nút Xóa</li>
+            <li>
+                (Thêm “xịn” một chút) Lưu dữ liệu vào localStorage để tải lại trang vẫn
+                còn
+            </li>
+        </ul>
+
+        <!-- Mục 2 -->
+        <h2>2) Tạo cấu trúc dự án</h2>
+        <p>Bạn tạo 3 file:</p>
+        <ul>
+            <li><code class="language-html">index.html</code></li>
+            <li><code class="language-html">style.css</code></li>
+            <li><code class="language-html">app.js</code></li>
+        </ul>
+
+        <!-- Mục 3 -->
+        <h2>3) Bước 1 - Tạo giao diện HTML</h2>
+        <p>
+            <b>Mô tả:</b><br />Ta dựng khung giao diện gồm tiêu đề, ô input, nút thêm và
+            danh sách hiển thị.
+        </p>
+
+        <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;vi&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset&#x3D;&quot;UTF-8&quot; &#x2F;&gt;
+  &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&#x2F;&gt;
+  &lt;title&gt;Todo List - HTML CSS JS&lt;&#x2F;title&gt;
+  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;style.css&quot; &#x2F;&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;h1 class&#x3D;&quot;title&quot;&gt;✅ Todo List&lt;&#x2F;h1&gt;
+
+    &lt;div class&#x3D;&quot;todo-form&quot;&gt;
+      &lt;input id&#x3D;&quot;todoInput&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Nhập việc cần làm...&quot; &#x2F;&gt;
+      &lt;button id&#x3D;&quot;addBtn&quot;&gt;Thêm&lt;&#x2F;button&gt;
+    &lt;&#x2F;div&gt;
+
+    &lt;ul id&#x3D;&quot;todoList&quot; class&#x3D;&quot;todo-list&quot;&gt;&lt;&#x2F;ul&gt;
+  &lt;&#x2F;div&gt;
+
+  &lt;script src&#x3D;&quot;app.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+
+        <p><b>Giải thích:</b></p>
+        <ul>
+            <li><code class="language-html">#todoInput</code> là ô nhập công việc.</li>
+            <li><code class="language-html">#addBtn</code> là nút thêm.</li>
+            <li>
+                <code class="language-html">#todoList</code> là nơi hiển thị danh sách
+                dưới dạng ul.
+            </li>
+            <li>
+                File JS đặt cuối <code class="language-html">body</code> để đảm bảo HTML
+                tải xong rồi JS mới chạy.
+            </li>
+        </ul>
+
+        <!-- Mục 4 -->
+        <h2>4) Bước 2 — CSS để giao diện đẹp và rõ ràng</h2>
+        <p>
+            <b>Mô tả:</b><br />
+            Ta làm layout gọn gàng, có khoảng cách, tạo “card” cho mỗi todo, và style nút
+            xóa.
+        </p>
+        <pre><code class="language-css">&#x2F;* style.css *&#x2F;
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+body {
+  margin: 0;
+  background: #f6f7fb;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.app {
+  width: 100%;
+  max-width: 520px;
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.title {
+  margin: 0 0 16px;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+}
+
+#todoInput {
+  flex: 1;
+  padding: 12px 12px;
+  border: 1px solid #d9dbe3;
+  border-radius: 10px;
+  outline: none;
+}
+
+#todoInput:focus {
+  border-color: #6b7cff;
+}
+
+#addBtn {
+  padding: 12px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #6b7cff;
+  color: white;
+  cursor: pointer;
+}
+
+#addBtn:hover {
+  opacity: 0.9;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px;
+  border: 1px solid #ececf3;
+  border-radius: 12px;
+}
+
+.todo-text {
+  word-break: break-word;
+}
+
+.delete-btn {
+  border: none;
+  background: #ff4d4f;
+  color: white;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  opacity: 0.9;
+}
+
+.empty {
+  color: #777;
+  text-align: center;
+  padding: 12px;
+}</code></pre>
+
+        <p><b>Giải thích:</b></p>
+        <ul>
+            <li>
+                <code class="language-css">.todo-for</code> dùng
+                <code class="language-css">flex</code> để input co giãn và nút đứng cạnh.
+            </li>
+            <li>
+                <code class="language-css">.todo-list</code> dùng
+                <code class="language-css">grid</code> để các item có khoảng cách đều.
+            </li>
+            <li>
+                <code class="language-css">.todo-item</code> là “thẻ” của mỗi công việc.
+            </li>
+            <li>
+                <code class="language-css">.empty</code> sẽ dùng khi danh sách rỗng (bước
+                JS ta sẽ render).
+            </li>
+        </ul>
+
+        <!-- Mục 5 -->
+        <h2>Bước 3 — JavaScript: thêm, hiển thị, xóa (có lưu localStorage)</h2>
+        <p>
+            <b>Mô tả:</b> <br />
+            Ta sẽ:
+        </p>
+        <ol>
+            <li>Lấy các element từ HTML</li>
+            <li>Tạo mảng <code class="language-js">todos</code></li>
+            <li>Viết hàm <code class="language-js">render()</code> để vẽ danh sách</li>
+            <li>Viết hàm <code class="language-js">addTodo()</code> để thêm</li>
+            <li>Viết hàm <code class="language-js">deleteTodo()</code> để xóa</li>
+            <li>Lưu/đọc dữ liệu từ <code class="language-js">localStorage</code></li>
+        </ol>
+        <pre><code class="language-js">&#x2F;&#x2F; app.js
+
+&#x2F;&#x2F; 1) Lấy phần tử HTML
+const todoInput &#x3D; document.getElementById(&quot;todoInput&quot;);
+const addBtn &#x3D; document.getElementById(&quot;addBtn&quot;);
+const todoList &#x3D; document.getElementById(&quot;todoList&quot;);
+
+&#x2F;&#x2F; 2) Load dữ liệu từ localStorage (nếu có)
+const STORAGE_KEY &#x3D; &quot;todos_v1&quot;;
+let todos &#x3D; JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+&#x2F;&#x2F; 3) Hàm lưu dữ liệu
+function saveTodos() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+}
+
+&#x2F;&#x2F; 4) Hàm hiển thị danh sách
+function render() {
+  &#x2F;&#x2F; Xóa UI cũ
+  todoList.innerHTML &#x3D; &quot;&quot;;
+
+  &#x2F;&#x2F; Nếu rỗng thì hiện trạng thái empty
+  if (todos.length &#x3D;&#x3D;&#x3D; 0) {
+    const li &#x3D; document.createElement(&quot;li&quot;);
+    li.className &#x3D; &quot;empty&quot;;
+    li.textContent &#x3D; &quot;Chưa có công việc nào. Hãy thêm việc mới!&quot;;
+    todoList.appendChild(li);
+    return;
+  }
+
+  &#x2F;&#x2F; Tạo UI cho từng todo
+  todos.forEach((todo) &#x3D;&gt; {
+    const li &#x3D; document.createElement(&quot;li&quot;);
+    li.className &#x3D; &quot;todo-item&quot;;
+
+    const span &#x3D; document.createElement(&quot;span&quot;);
+    span.className &#x3D; &quot;todo-text&quot;;
+    span.textContent &#x3D; todo.text;
+
+    const delBtn &#x3D; document.createElement(&quot;button&quot;);
+    delBtn.className &#x3D; &quot;delete-btn&quot;;
+    delBtn.textContent &#x3D; &quot;Xóa&quot;;
+
+    &#x2F;&#x2F; Khi bấm xóa
+    delBtn.addEventListener(&quot;click&quot;, () &#x3D;&gt; {
+      deleteTodo(todo.id);
+    });
+
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    todoList.appendChild(li);
+  });
+}
+
+&#x2F;&#x2F; 5) Hàm thêm todo
+function addTodo() {
+  const text &#x3D; todoInput.value.trim();
+
+  &#x2F;&#x2F; Chặn thêm rỗng
+  if (!text) return;
+
+  const newTodo &#x3D; {
+    id: Date.now(), &#x2F;&#x2F; tạo id đơn giản bằng timestamp
+    text: text,
+  };
+
+  todos.unshift(newTodo); &#x2F;&#x2F; thêm lên đầu danh sách
+  saveTodos();
+  render();
+
+  &#x2F;&#x2F; reset input
+  todoInput.value &#x3D; &quot;&quot;;
+  todoInput.focus();
+}
+
+&#x2F;&#x2F; 6) Hàm xóa todo theo id
+function deleteTodo(id) {
+  todos &#x3D; todos.filter((t) &#x3D;&gt; t.id !&#x3D;&#x3D; id);
+  saveTodos();
+  render();
+}
+
+&#x2F;&#x2F; 7) Gắn sự kiện
+addBtn.addEventListener(&quot;click&quot;, addTodo);
+
+&#x2F;&#x2F; Enter để thêm nhanh
+todoInput.addEventListener(&quot;keydown&quot;, (e) &#x3D;&gt; {
+  if (e.key &#x3D;&#x3D;&#x3D; &quot;Enter&quot;) addTodo();
+});
+
+&#x2F;&#x2F; 8) Render lần đầu
+render();</code></pre>
+
+        <p><b>Giải thích:</b></p>
+        <ul>
+            <li>
+                <code class="language-js">todos</code> là mảng dữ liệu chính, mỗi phần tử
+                có <code class="language-js">{id, text}</code>.
+            </li>
+            <li>
+                <code class="language-js">render()</code> chịu trách nhiệm
+                <b>hiển thị</b>: luôn xóa UI cũ rồi vẽ lại từ dữ liệu mới.
+            </li>
+            <li>
+                <code class="language-js">addTodo()</code>:
+                <ul>
+                    <li>
+                        lấy text từ input, <code class="language-js">trim()</code> để bỏ
+                        khoảng trắng
+                    </li>
+                    <li>nếu rỗng thì không thêm</li>
+                    <li>tạo id bằng <code class="language-js">Date.now()</code></li>
+                    <li>
+                        <code class="language-js">unshift()</code> để todo mới nằm trên
+                        cùng
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <code class="language-js">deleteTodo(id)</code> dùng
+                <code class="language-js">filter()</code> để loại todo có id tương ứng.
+            </li>
+            <li>
+                <code class="language-js">localStorage</code> giúp lưu lại dữ liệu khi
+                refresh trang.
+            </li>
+        </ul>
+
+        <!-- Mục 6 -->
+        <h2>Kiểm tra nhanh</h2>
+        <p>Bạn mở <code class="language-html">index.html</code> lên và thử:</p>
+        <ul>
+            <li>Nhập “Học JavaScript” → <b>Thêm</b></li>
+            <li>Nhấn Enter để thêm nhanh</li>
+            <li>Nhấn Xóa để xóa 1 dòng</li>
+            <li>Refresh trang → dữ liệu vẫn còn</li>
+        </ul>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    </body>
+</html>

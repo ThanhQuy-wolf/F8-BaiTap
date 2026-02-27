@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Giới thiệu bản thân - Tạ Nguyễn Thành Quý</title>
+
+        <!-- External CSS -->
+        <link rel="stylesheet" href="intro.css" />
+
+        <!-- Internal CSS -->
+        <style>
+            /* Kiểu dáng riêng cho trang này */
+            .container {
+                box-shadow: 0 4px 20px rgba(46, 125, 50, 0.1);
+            }
+
+            /* Định dạng thẻ time trong dl */
+            dd time {
+                font-style: normal;
+            }
+
+            /* Gạch chân tên trường */
+            .university {
+                font-style: italic;
+                color: #388e3c;
+            }
+
+            /* Tên thú cưng nổi bật */
+            .pet-name {
+                font-weight: bold;
+                color: #2e7d32;
+            }
+
+            /* Dòng trạng thái yêu đương */
+            .relationship {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+
+            <!-- Header: Tên và tagline -->
+            <header>
+                <h1 style="margin-bottom: 8px;">Tạ Nguyễn Thành Quý</h1>
+                <p style="font-style: italic; color: #5a7a5c; font-size: 1rem;">
+                    Sinh viên Kỹ thuật Phần mềm &mdash; Tôn Đức Thắng University
+                </p>
+            </header>
+
+            <!-- Nội dung chính -->
+            <main>
+                <article>
+
+                    <!-- Mục 1: Thông tin cá nhân -->
+                    <section>
+                        <h2>Thông tin cá nhân</h2>
+                        <dl>
+                            <dt>Họ và tên</dt>
+                            <dd>Tạ Nguyễn Thành Quý</dd>
+
+                            <dt>Ngày sinh</dt>
+                            <dd><time datetime="2006-04-06">06/04/2006</time></dd>
+
+                            <dt>Chiều cao</dt>
+                            <dd>174&nbsp;cm</dd>
+
+                            <dt>Cân nặng</dt>
+                            <dd>65&nbsp;kg</dd>
+
+                            <dt>Số điện thoại</dt>
+                            <dd>
+                                <address>
+                                    <a href="tel:+84862722425">0862722425</a>
+                                </address>
+                            </dd>
+
+                            <dt>Chuyên ngành</dt>
+                            <dd>
+                                Software Engineering &mdash;
+                                <span class="university">Tôn Đức Thắng University</span>
+                            </dd>
+                        </dl>
+                    </section>
+
+                    <!-- Mục 2: Sở thích -->
+                    <section>
+                        <h2>Sở thích</h2>
+                        <ul class="hobby-list">
+                            <li>💻 Code</li>
+                            <li>🔍 Tìm hiểu phần mềm</li>
+                            <li>🎮 Chơi game</li>
+                        </ul>
+                    </section>
+
+                    <!-- Mục 3: Thông tin thêm -->
+                    <section>
+                        <h2>Thông tin thêm</h2>
+                        <div class="extra-info">
+                            <p>
+                                🐱 Thú cưng: 1 bé mèo tên
+                                <span class="pet-name">Mè</span>
+                            </p>
+                            <p class="relationship" style="color: #c0392b;">
+                                ❤️ Tình trạng yêu đương: Đã có người yêu
+                            </p>
+                        </div>
+                    </section>
+
+                </article>
+            </main>
+
+            <!-- Footer: Liên hệ -->
+            <footer>
+                <address>
+                    Liên hệ:
+                    <a href="tel:+84862722425">0862722425</a>
+                    &nbsp;|&nbsp;
+                    <a href="mailto:tanguyenthanhquy@gmail.com">tanguyenthanhquy@gmail.com</a>
+                </address>
+                <small>&copy; 2025 Tạ Nguyễn Thành Quý</small>
+            </footer>
+
+        </div>
+    </body>
+</html>

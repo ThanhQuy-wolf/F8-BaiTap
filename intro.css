@@ -1,0 +1,154 @@
+/* ===== External CSS: intro.css ===== */
+
+/* Reset cơ bản */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body */
+body {
+    font-family: "Times New Roman", Times, serif;
+    background-color: #f4faf4;
+    color: #2c3e2d;
+    line-height: 1.8;
+    padding: 40px 16px;
+}
+
+/* Container chính */
+.container {
+    max-width: 680px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* ===== Header ===== */
+header {
+    background-color: #e8f5e9;
+    text-align: center;
+    padding: 36px 32px 28px;
+    border-bottom: 2px solid #c8e6c9;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #2e7d32;
+    letter-spacing: 1px;
+}
+
+/* ===== Main & Article ===== */
+main {
+    padding: 0 32px;
+}
+
+article {
+    padding: 8px 0;
+}
+
+/* ===== Section ===== */
+section {
+    padding: 24px 0;
+    border-bottom: 1px solid #e8f5e9;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+/* Tiêu đề section */
+section h2 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #388e3c;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    padding-left: 10px;
+    border-left: 4px solid #66bb6a;
+}
+
+/* ===== Definition List (Thông tin cá nhân) ===== */
+dl {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 10px 16px;
+    align-items: baseline;
+}
+
+dt {
+    font-weight: bold;
+    color: #4a7c59;
+    font-size: 0.95rem;
+}
+
+dt::after {
+    content: ":";
+}
+
+dd {
+    color: #2c3e2d;
+    font-size: 0.95rem;
+}
+
+/* ===== Links ===== */
+a {
+    color: #388e3c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #2e7d32;
+}
+
+/* ===== Danh sách sở thích ===== */
+.hobby-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+}
+
+.hobby-list li {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.95rem;
+}
+
+.hobby-list li:hover {
+    background-color: #c8e6c9;
+}
+
+/* ===== Thông tin thêm ===== */
+.extra-info p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+/* ===== Footer ===== */
+footer {
+    background-color: #e8f5e9;
+    text-align: center;
+    padding: 20px 32px;
+    border-top: 2px solid #c8e6c9;
+}
+
+footer address {
+    font-style: normal;
+    font-size: 0.9rem;
+    color: #4a7c59;
+    margin-bottom: 6px;
+}
+
+footer small {
+    font-size: 0.8rem;
+    color: #7aab82;
+}
