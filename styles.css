@@ -1,0 +1,10 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+p,ul,ol {
+    margin: 30px 0;
+}
